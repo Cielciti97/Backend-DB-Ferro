@@ -1,5 +1,17 @@
-# Backend-DB-Ferro
-Este repo contiene el Diagrama entidad-relación, Scripts de creación de la base de datos y para insertar registros en las tablas.
+> [!NOTE]
+> BACKEND | FERRO DATABASE STRUCTURE
+
+
+
+
+>[!IMPORTANT]
+> 
+> ESTE REPOSITORIO CONTIENE:
+> 1. EL DIAGRAMA ENTIDAD-RELACIÓN DEL E-COMMERCE "FERRO"
+> 2. SCRIPT PARA LA CREACIÓN DE LA BASE DE DATOS
+> 3. SCRIPT PARA INSERTAR REGISTROS EN LAS TABLAS
 
 ![FERRO_EER_DIAGRAM](https://github.com/Cielciti97/Backend-DB-Ferro/assets/149416541/48039715-4a84-4b10-a8aa-d11835950729)
 
+> [!TIP]
+> TE RECOMENDAMOS CLONAR EL REPOSITORIO PARA TENER UNA COPIA LOCAL :)
