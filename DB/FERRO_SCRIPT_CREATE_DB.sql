@@ -15,9 +15,9 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`product`
+-- Table `mydb`.`products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`product` (
+CREATE TABLE IF NOT EXISTS `mydb`.`products` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `price` DECIMAL(9,2) NOT NULL,
@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`users` (
   `address` VARCHAR(450) NULL,
   `phone` VARCHAR(45) NOT NULL,
   `email` VARCHAR(35) NOT NULL,
+  `password` VARCHAR(45) NULL,
   `privileges_id` BIGINT NOT NULL,
   PRIMARY KEY (`id`, `privileges_id`),
   INDEX `fk_users_privileges1_idx` (`privileges_id` ASC) VISIBLE,
@@ -68,9 +69,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`order`
+-- Table `mydb`.`orders`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`order` (
+CREATE TABLE IF NOT EXISTS `mydb`.`orders` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `order_date` TIMESTAMP NOT NULL,
   `total` DECIMAL(9,2) NOT NULL,
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`order` (
   PRIMARY KEY (`id`),
   INDEX `fk_order_users1_idx` (`users_id` ASC) VISIBLE,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  CONSTRAINT `fk_order_users1`
+  CONSTRAINT `fk_orders_users1`
     FOREIGN KEY (`users_id`)
     REFERENCES `mydb`.`users` (`id`)
     ON DELETE NO ACTION
@@ -87,22 +88,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`order_has_product`
+-- Table `mydb`.`orders_has_products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`order_has_product` (
-  `order_id` BIGINT NOT NULL,
-  `product_id` BIGINT NOT NULL,
-  PRIMARY KEY (`order_id`, `product_id`),
-  INDEX `fk_order_has_product_product1_idx` (`product_id` ASC) VISIBLE,
-  INDEX `fk_order_has_product_order1_idx` (`order_id` ASC) VISIBLE,
-  CONSTRAINT `fk_order_has_product_order1`
-    FOREIGN KEY (`order_id`)
-    REFERENCES `mydb`.`order` (`id`)
+CREATE TABLE IF NOT EXISTS `mydb`.`orders_has_products` (
+  `orders_id` BIGINT NOT NULL,
+  `products_id` BIGINT NOT NULL,
+  PRIMARY KEY (`orders_id`, `products_id`),
+  INDEX `fk_orders_has_products_products1_idx` (`products_id` ASC) VISIBLE,
+  INDEX `fk_orders_has_products_orders1_idx` (`orders_id` ASC) VISIBLE,
+  CONSTRAINT `fk_orders_has_products_orders1`
+    FOREIGN KEY (`orders_id`)
+    REFERENCES `mydb`.`orders` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_order_has_product_product1`
-    FOREIGN KEY (`product_id`)
-    REFERENCES `mydb`.`product` (`id`)
+  CONSTRAINT `fk_orders_has_products_products1`
+    FOREIGN KEY (`products_id`)
+    REFERENCES `mydb`.`products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
